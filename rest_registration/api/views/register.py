@@ -10,7 +10,7 @@ from rest_registration.decorators import (
 from rest_registration.exceptions import BadRequest
 from rest_registration.notifications import send_verification_notification
 from rest_registration.settings import registration_settings
-from rest_registration.signals import verified_account
+from rest_registration.signals import account_verified
 from rest_registration.utils import (
     get_ok_response,
     get_user_by_id,
@@ -90,7 +90,7 @@ def verify_registration(request):
     user_data = output_serializer.data
 
     # Send signal
-    verified_account.send(sender=verify_registration, user=user)
+    account_verified.send(sender=None, user=user)
 
     return Response(user_data, status=200)
 
