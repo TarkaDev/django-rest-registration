@@ -89,7 +89,6 @@ def verify_registration(request):
     output_serializer = output_serializer_class(instance=user)
     user_data = output_serializer.data
 
-    # Send signal
     account_verified.send(sender=None, user=user)
 
     return Response(user_data, status=200)
